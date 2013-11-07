@@ -25,6 +25,8 @@
     "grunt-contrib-htmlmin": "~0.1.3",
     "grunt-contrib-uglify": "~0.2.5",
     "grunt-s3": "~0.2.0-alpha.3",
-    "matchdep": "~0.3.0"
+    "matchdep": "~0.3.0",
+    "fs-extra": "~0.8.1",
+    "grunt-git-assist" : "cinema6/grunt-git-assist"
   }
 }
