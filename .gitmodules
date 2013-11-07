@@ -1,0 +1,3 @@
+[submodule "angular.js"]
+	path = angular.js
+	url = git@github.com:cinema6/angular.js.git
