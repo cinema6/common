@@ -1,0 +1,15 @@
+[submodule "src/angular"]
+	path = src/angular
+	url = git@github.com:cinema6/angular.js.git
+[submodule "src/gsap"]
+	path = src/gsap
+	url = git@github.com:cinema6/GreenSock-JS.git
+[submodule "src/hammer.js"]
+	path = src/hammer.js
+	url = git@github.com:cinema6/hammer.js.git
+[submodule "src/jquery"]
+	path = src/jquery
+	url = git@github.com:cinema6/jquery.git
+[submodule "src/ui-router"]
+	path = src/ui-router
+	url = git@github.com:cinema6/ui-router.git

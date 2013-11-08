@@ -5,50 +5,42 @@ var fs   = require('fs-extra'),
             "grunt"     : ["package"], 
             "buildDir"  : "build",
             "repo"      : "git@github.com:cinema6/angular.js.git",
-            "path"      : path.join(__dirname,'src','angular'),
-            "target"    : path.join(__dirname,'lib','angular'),
-            "remotes"   : [
-                { "upstream"  : "https://github.com/angular/angular.js.git" }
-            ]
+            "path"      : path.join('src','angular'),
+            "target"    : path.join('lib','angular'),
+            "remotes"   : { "upstream"  : "https://github.com/angular/angular.js.git" }
         },
         "GreenSock-JS"  : {
             "buildDir"  : "src/minified", 
             "npm"       : false, 
             "grunt"     : false ,
             "repo"      : "git@github.com:cinema6/GreenSock-JS.git",
-            "path"      : path.join(__dirname,'src','gsap'),
-            "target"    : path.join(__dirname,'lib','gsap'),
-            "remotes"   : [
-                { "upstream"  : "https://github.com/greensock/GreenSock-JS.git"}
-            ]
+            "path"      : path.join('src','gsap'),
+            "target"    : path.join('lib','gsap'),
+            "remotes"   : { "upstream"  : "https://github.com/greensock/GreenSock-JS.git"}
         },
         "hammer.js"     : {
-            "grunt"     : ["build"],
+            "grunt"     : ["build","--force"],
             "buildDir"  : "dist",
-            "path"      : path.join(__dirname,'src','hammer.js'),
-            "target"    : path.join(__dirname,'lib','hammer.js'),
+            "path"      : path.join('src','hammer.js'),
+            "target"    : path.join('lib','hammer.js'),
             "repo"      : "git@github.com:cinema6/hammer.js.git",
-            "remotes"   : []
+            "remotes"   : { "upstream" : "git@github.com:EightMedia/hammer.js.git" }
         },
         "jquery"        : {
             "grunt"     : [],
             "buildDir"  : "dist",
             "repo"      : "git@github.com:cinema6/jquery.git",
-            "path"      : path.join(__dirname,'src','jquery'),
-            "target"    : path.join(__dirname,'lib','jquery'),
-            "remotes"   : [
-                { "upstream"  : "https://github.com/jquery/jquery.git" }
-            ]
+            "path"      : path.join('src','jquery'),
+            "target"    : path.join('lib','jquery'),
+            "remotes"   : { "upstream"  : "https://github.com/jquery/jquery.git" }
         },
         "ui-router"     : {
             "grunt"     : [],
             "buildDir"  : "build",
             "repo"      : "git@github.com:cinema6/ui-router.git",
-            "path"      : path.join(__dirname,'src','ui-router'),
-            "target"    : path.join(__dirname,'lib','ui-router'),
-            "remotes"   : [
-                { "upstream"  : "https://github.com/angular-ui/ui-router.git" }
-            ]
+            "path"      : path.join('src','ui-router'),
+            "target"    : path.join('lib','ui-router'),
+            "remotes"   : { "upstream"  : "https://github.com/angular-ui/ui-router.git" }
         }
     };
 
