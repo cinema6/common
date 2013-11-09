@@ -17,16 +17,12 @@
     "url": "https://github.com/cinema6/common/issues"
   },
   "devDependencies": {
+    "fs-extra": "~0.8.1",
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-contrib-cssmin": "~0.7.0",
-    "grunt-contrib-htmlmin": "~0.1.3",
-    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-git-assist" : "cinema6/grunt-git-assist",
     "grunt-s3": "~0.2.0-alpha.3",
-    "matchdep": "~0.3.0",
-    "fs-extra": "~0.8.1",
-    "grunt-git-assist" : "cinema6/grunt-git-assist"
+    "matchdep": "~0.3.0"
   }
 }

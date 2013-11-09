@@ -13,3 +13,6 @@
 [submodule "src/ui-router"]
 	path = src/ui-router
 	url = git@github.com:cinema6/ui-router.git
+[submodule "src/c6ui"]
+	path = src/c6ui
+	url = git@github.com:cinema6/c6ui.git
