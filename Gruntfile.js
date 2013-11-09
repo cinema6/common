@@ -34,7 +34,8 @@ module.exports = function (grunt) {
                 secret: aws_auth.secretAccessKey,
                 bucket: 'c6.dev',
                 access: 'public-read',
-                maxOperations: 4
+                headers : { 'Cache-Control' : 'max-age=31536000' },
+                maxOperations: 10 
             },
             test: {
                 options: {
@@ -44,8 +45,7 @@ module.exports = function (grunt) {
                     {
                         src: 'lib/**',
                         dest: 'ext/',
-                        rel : 'lib/',
-                        headers : { 'cache-control' : 'max-age=31536000' }
+                        rel : 'lib/'
                     }
                 ]
             }
