@@ -4,6 +4,9 @@ This repositiory is setup to manage common libraries that will be accessed by ma
 
 If you have just cloned this repository, the first thing you will need to do is to load the submodules. You can do this with the following:
 
+> __IMPORTANT__ In order to take full advantage of the features described below you need to have the command line version
+of git installed on your machine, and in your PATH environment variable.
+
 ## Getting Started
 
 (1) Begin by cloning the common repo, and changing to that directory.
