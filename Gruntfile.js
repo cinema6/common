@@ -96,12 +96,13 @@ module.exports = function (grunt) {
         return true;
     });
 
-    grunt.registerTask('build-all',['build','copy']);
-
     grunt.registerTask('status',['submodule_version','print-versions']);
 
-    grunt.registerTask('default',['build']);
+    grunt.registerTask('init',['submodule_update','add_remotes','status']);
 
+    grunt.registerTask('build-all',['build','copy']);
+
+    grunt.registerTask('default',['build-all']);
 
 };
 
