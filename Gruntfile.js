@@ -1,6 +1,6 @@
 var fs   = require('fs-extra'),
     path = require('path'),
-    modules = fs.readJsonSync(path.join(__dirname,"modules.json")),
+    submodules = fs.readJsonSync(path.join(__dirname,"modules.json")),
     aws_auth;
 
 module.exports = function (grunt) {
@@ -12,14 +12,18 @@ module.exports = function (grunt) {
                 path.join(process.env.HOME,'.aws.json')
         );
     }
-    
+   
+    submodules.options = {
+        skipSyncIfNoRemote : true
+    };
+
     grunt.initConfig({
-        add :          modules,
-        add_remotes :  modules, 
-        build :        modules,
-        sync :         modules,
+        add :          submodules,
+        add_remotes :  submodules, 
+        build :        submodules,
+        sync :         submodules,
         
-        submodule_version :      modules,
+        submodule_version :      submodules,
         
         upload: {
             options: {
