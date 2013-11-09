@@ -14,14 +14,17 @@ module.exports = function (grunt) {
     }
    
     submodules.options = {
-        skipSyncIfNoRemote : true
+        sync : {
+            skipIfNoRemote : true
+        }
     };
 
     grunt.initConfig({
-        add :          submodules,
+        add         :  submodules,
         add_remotes :  submodules, 
-        build :        submodules,
-        sync :         submodules,
+        build       :  submodules,
+        checkout    :  submodules,
+        sync        :  submodules,
         
         submodule_version :      submodules,
         
@@ -74,14 +77,14 @@ module.exports = function (grunt) {
                 ]
             }
         }
-
     });
 
     grunt.task.renameTask('s3','upload');
-    grunt.task.renameTask('submodule_add','add');
-    grunt.task.renameTask('submodule_add_remotes','add_remotes');
-    grunt.task.renameTask('submodule_build','build');
-    grunt.task.renameTask('submodule_sync','sync');
+    grunt.task.renameTask('submodule_add'           , 'add');
+    grunt.task.renameTask('submodule_add_remotes'   , 'add_remotes');
+    grunt.task.renameTask('submodule_build'         , 'build');
+    grunt.task.renameTask('submodule_checkout'      , 'checkout');
+    grunt.task.renameTask('submodule_sync'          , 'sync');
     
     grunt.registerTask('print-versions','Prints versions from submodule_version',function(){
         this.requires('status');
@@ -103,6 +106,5 @@ module.exports = function (grunt) {
     grunt.registerTask('build-all',['build','copy']);
 
     grunt.registerTask('default',['build-all']);
-
 };
 
