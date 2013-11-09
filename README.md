@@ -147,41 +147,117 @@ $ grunt checkout:jquery:2.0.0
 $ grunt checkout:hammer.js:.
 ```
 
-__clean__ - Will remove the target directory.
+__clean__ - Will remove the build output directory.  This is configured in the Gruntfile.js.
 
 __copy__ - Will copy the static directories to the target directory.  Like clean, this is configured in the Gruntfile.js.
 
-__status__ - Display the current commits/tags of the submodules, viz-a-viz the git describe command.  You can run git submodule status for a similar view.
+__init__ - Will setup the project.  Intended to be run just after you clone, but safe to call again later.
 
-sync - Attempt to synchronize the target modules remote (upstream by default) to the forked repository (origin).  Basically a fetch, merge into the local master, then push up to origin master.  Finally, reset the submodule back to the commit it was at prior to the sync.  Note, depending on the state of the local repo, a sync may fail.
+init will perform the following:
 
-upload - An alias for s3.  Use the appropriate task target to specify the environment to which you are publishing the libs (ex:  grunt publish:test).
+>
+> 1. run the git submodule update command
+> 2. run the add_remotes task.
+> 3. run the status task to display the current state of the submodules.
+>
 
-Submodule status
-Efforts should be made to keep our common libraries pointed to the most up-to-date versions our applications can support.  The general method for doing this is as follows.
+__status__ - Display the current commits/tags of the submodules, viz-a-viz the git describe command.
 
-1. Synchronize with the upstream.
 ```bash
-$   grunt sync
+$ grunt status
+...
+Running "print-versions" task
+-----------------------------
+angular.js      :         v1.1.5-0-g9a7035e
+c6ui            :      release12-0-g2d6c6d0
+GreenSock-JS    :         1.10.3-0-g6c6c647
+hammer.js       :       v1.0.5.a-0-g0a2968d
+jquery          :          2.0.3-0-gf576d00
+ui-router       :          0.2.0-0-g818b0d6
 ```
-2. From the submodule directory of the library you are looking to update, run a git checkout on the appropriate branch or tag.
+
+__sync__ - Attempt to synchronize the target modules remote (upstream by default) to the forked repository (origin). 
+
+sync will perform the following:
+
+>  
+> 1. Perform a fetch against the remote (upstream)
+> 2. Checkout origin/master
+> 3. Merge remote/master into origin/master
+> 4. Push origin/master back up to origin (with the updates from the remote).
+> 5. Checkout the commit that the submodule was on before the sync began.
+>
+
+__upload__ - An alias for s3.  Use the appropriate task target to specify the environment to which you are publishing the libs.
+
 ```bash
-$  cd src/jquery
-$  git checkout 2.0.4
-$  ../..
+# Upload to the s3 test bucket
+$  grunt publish:test
 ```
-3. Once you have updated the current commit of your library build it.
+
+##Updating a submodule library version
+Efforts should be made to keep our common libraries pointed to the most up-to-date versions our applications can support.
+For example, the following procedure illustrates how to update angular from 1.1.5 to 2.0.0.
+
+(1) Synchronize with the upstream.
+
 ```bash
-$  grunt build:jquery
+$   grunt sync:angular.js
 ```
-4. When your build completes, upload to s3.
+
+(2) Checkout the desired version.
+
+```bash
+$  grunt checkout:angular.js:2.0.0
+```
+
+(3) Build the new version.
+
+```bash
+$  grunt build:angular.js
+```
+
+(4) When your build completes, upload to s3.
+
 ```bash
 $  grunt publish:test
 ```
-5. Finally, be sure to update the common repo with the new HEAD for the lib.
+
+At this point, running the ```git status``` command will show you something like this:
+
 ```bash
-$  git add src/jquery
-$  git commit -m "updated jquery to 2.0.4"
-$  git push origin master
+
+$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   src/angular (new commits)
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+
 ```
+
+If you want to save 2.0.0 as the new "current" version of the lib, commit the change back to the common repo.
+
+```bash
+
+$  git add src/angular
+$  git commit -m "updated angular to 2.0.0"
+$  git push origin master
+
+```
+
+Otherwise, revert back to the previous version.
+
+```bash
+
+$  grunt checkout:angular.js:v1.1.5
+$  git status
+# On branch master
+nothing to commit (working directory clean)
+
+```
+
 
