@@ -1,53 +1,10 @@
 var fs   = require('fs-extra'),
     path = require('path'),
-    modules = {
-        "angular.js"    : {
-            "grunt"     : ["package"], 
-            "buildDir"  : "build",
-            "repo"      : "git@github.com:cinema6/angular.js.git",
-            "path"      : path.join('src','angular'),
-            "target"    : path.join('lib','angular'),
-            "remotes"   : { "upstream"  : "https://github.com/angular/angular.js.git" }
-        },
-        "GreenSock-JS"  : {
-            "buildDir"  : "src/minified", 
-            "npm"       : false, 
-            "grunt"     : false ,
-            "repo"      : "git@github.com:cinema6/GreenSock-JS.git",
-            "path"      : path.join('src','gsap'),
-            "target"    : path.join('lib','gsap'),
-            "remotes"   : { "upstream"  : "https://github.com/greensock/GreenSock-JS.git"}
-        },
-        "hammer.js"     : {
-            "grunt"     : ["build","--force"],
-            "buildDir"  : "dist",
-            "path"      : path.join('src','hammer.js'),
-            "target"    : path.join('lib','hammer.js'),
-            "repo"      : "git@github.com:cinema6/hammer.js.git",
-            "remotes"   : { "upstream" : "git@github.com:EightMedia/hammer.js.git" }
-        },
-        "jquery"        : {
-            "grunt"     : [],
-            "buildDir"  : "dist",
-            "repo"      : "git@github.com:cinema6/jquery.git",
-            "path"      : path.join('src','jquery'),
-            "target"    : path.join('lib','jquery'),
-            "remotes"   : { "upstream"  : "https://github.com/jquery/jquery.git" }
-        },
-        "ui-router"     : {
-            "grunt"     : [],
-            "buildDir"  : "build",
-            "repo"      : "git@github.com:cinema6/ui-router.git",
-            "path"      : path.join('src','ui-router'),
-            "target"    : path.join('lib','ui-router'),
-            "remotes"   : { "upstream"  : "https://github.com/angular-ui/ui-router.git" }
-        }
-    };
+    modules = fs.readJsonSync(path.join(__dirname,"modules.json"));
 
 module.exports = function (grunt) {
     // load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-
 
     grunt.initConfig({
         
@@ -55,9 +12,30 @@ module.exports = function (grunt) {
 
         submodule_add_remotes :  modules, 
 
-        submodule_build :        modules
+        submodule_build :        modules,
+        
+        submodule_version :      modules,
+
+        build:                   modules
 
     });
+
+    grunt.task.renameTask('submodule_build','build');
+
+    grunt.registerTask('print-versions',function(){
+        var versionData = grunt.config('submodule_versions');
+        if (!versionData){
+            grunt.log.errorlns('Failed to obtain version data.');
+            return false;
+        }
+
+        for (var module in versionData){
+            grunt.log.writelns(module + ': ' + versionData[module]);
+        }
+        return true;
+    });
+
+    grunt.registerTask('show-versions',['submodule_version','print-versions']);
 
     grunt.registerTask('printCommit',function(){
         grunt.log.writelns('LastCommit: ' + grunt.config('git_last_commit').commit);
