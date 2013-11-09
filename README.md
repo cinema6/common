@@ -1,16 +1,87 @@
-Common 3rd party dependencies
+# Common Libraries
 
 This repositiory is setup to manage common libraries that will be accessed by many Cinema6 web applications.
 
 If you have just cloned this repository, the first thing you will need to do is to load the submodules. You can do this with the following:
 
+## Getting Started
+
+(1) Begin by cloning the common repo, and changing to that directory.
+
 ```bash
-$  git submodule update --init
+$  git clone git@github.com:cinema6/common.git
+$  cd common
 ```
 
-This will download the source for each repository.
+(2) Next, run npm install to get all of the dependencies need to run Grunt.
 
-Modules file
+```bash
+$  npm install
+```
+
+(3) Initialize the project.
+
+```bash
+$  grunt init
+```
+Under the hood, the init task will call
+* call
+```
+git submodules update --init
+```
+* setup the configured remotes for the submodules
+* perform a status check on the current submodule versions
+
+If init runs without errors, the final output of the task should look something like this.
+
+```bash
+Running "print-versions" task
+-----------------------------
+angular.js      :         v1.1.5-0-g9a7035e
+c6ui            :      release12-0-g2d6c6d0
+GreenSock-JS    :         1.10.3-0-g6c6c647
+hammer.js       :       v1.0.5.a-0-g0a2968d
+jquery          :          2.0.3-0-gf576d00
+ui-router       :          0.2.0-0-g818b0d6
+```
+
+##Project structure
+The goal for this repository is to help manage the maintenance, versioning, and publishing of third party javascript
+libraries.  Tasks have been created to automate much of the git interactions around submodules, and the building of
+the dependencies.
+
+When you first clone the project you should see a directory structure like this.
+
+```bash
+_ Gruntfile.js
+_ README.md
+_ modules.json
+_ package.json
+_ src
+  |___ angular
+  |___ c6ui
+  |___ gsap
+  ...
+  |___ modernizr
+       |___ modernizr.custom.<version>.js
+       |___ modernizr.custom.<version>.js
+  |___ requirejs
+       |___ <version>
+            |___ r.js
+            |___ require.js
+            |___ require.min.js
+  |___ ui-router
+```
+The src directory will contain two types of content:
+* submodules - Empty directories for the submodules
+* static - Directories with sub-versioned folders and files for 3rd party code that we do not fork/build ourselves.
+
+Once you run the ```grunt inint``` command, the submodule directories will fill with the actual source.
+
+Pulling specific versions of 3rd party code, building and deploying to our s3 servers can be managed
+trough the modules file, and the grunt tasks described below.
+
+##Modules file
 The modules.json file is the "database" containing information about the submodules we will support.
 
 
