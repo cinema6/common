@@ -58,11 +58,11 @@ _ README.md
 _ modules.json
 _ package.json
 _ src
-  |___ angular
+  |___ angular  # (submodule)
   |___ c6ui
   |___ gsap
   ...
-  |___ modernizr
+  |___ modernizr # (static)
        |___ modernizr.custom.<version>.js
        |___ modernizr.custom.<version>.js
   |___ requirejs
@@ -82,10 +82,11 @@ Pulling specific versions of 3rd party code, building and deploying to our s3 se
 trough the modules file, and the grunt tasks described below.
 
 ##Modules file
-The modules.json file is the "database" containing information about the submodules we will support.
+The modules.json file is the "database" containing information about the submodules we will support.  It is maintained 
+as a spearate file to minimize the necessity for editing the Gruntfile.js.  The module.json file will be imported
+into the Gruntfile.js and fed to the various Grunt MultiTasks desribed in the next section.
 
-
-Example module record
+####Example module record
 ```json
     "angular.js"    : {
         "buildDir"  : "build",
@@ -98,45 +99,59 @@ Example module record
     }
 ```
 
-General record attributes
-repo - Used by submodule_add to locate the submodule on github (or bitbucket).
+####General record attributes
+These attributes are used for multiple tasks.
+* __repo__    - The (cinema6 forked) url of the submodule on github (or bitbucket).
+* __path__    - The local directory where the submodule will be located.  This should be a path relative to this repo's root.  
+* __remotes__ - One or more other repositories with which you might want to sync the repo.  The remotes attribute is required for the add_remotes and sync tasks.
 
-path - The local directory where the submodule will be located.  This should be a path relative to this repo's root.  
+####Build related attributes
+These attributes are used by the build task.
+* __npm__ - Set to true if the build should run npm for the submodule.
+* __grunt__ - Array of arguments to pass to grunt.  Setting this to false will bypass the grunt portion of the task.
+* __buildDir__ - The directory within a submodule where the build will occur.
+* __target__ - The relative path (from this repo's root) where the build output should be copied.
 
-remotes - One or more other repositories with which you might want to sync the repo.  In this example, the remotes contains "upstream", the actual angular repository from which we forked ours.  This be used by the submodule_add_remotes and submodule_sync tasks.
+##Tasks
+Most of the tasks in the Grunt file are Multi Tasks, where each record in the modules.json file represents a single
+task target.  If a grunt task is run without a target, it will be applied to all __submodules__ listed in modules.json.
 
-Build related attributes
+```bash
+# Example: To build all of the submodule libraries.
+$  grunt build
 
-npm - Set to true if the build should run npm for the submodule.
+# Example: To build only angular
+$  grunt build:angular.js
 
-grunt - Array of arguments to pass to grunt (used for build).  Setting this to false will bypass the grunt portion of the task.
+```
 
+#### The tasks
+__add__ - Will add submodule(s) from modules.json to the repository.  Typically you would only call this after adding
+a record to the modules.json file.  If a module has already been added, no error's will be raised.
 
-buildDir - The directory within a submodule where the build will occur.
+__add_remotes__ - Add the configured remotes to the submodules.  This will be done automatically when you run 
+```grunt init```.   After that you should only need to run this when the modules.json file is updated with new remotes.
 
-target - The relative path (from this repo's root).
+__build__ - Build the submodule(s).  Output will be copied to a versioned subdirectory of the submodule's target folder.
 
+__build-all__ - Build the submodule(s) and copy the static libraries to the target directory (configured in the Gruntfile.js copy configuration).
 
-Tasks
-With the exception of versions, the following are all multi-tasks.  If you run a task with no parameter, it will be applied to every submodule in the modules.json file.  To run a task for a single mobulde, simply add the module name as the target.
+__checkout__ - Checkout the desired ref of a submodule.  While this is a multi-task, it should be run with a single target.  The desired ref is
+added as a flag to the task target.  The option check.args can be configured to add git checkout command line arguments like -b from the Gruntfile.js
 
-For example:
+```bash
+# Example: Checkout version 2.0.0 of jquery
+$ grunt checkout:jquery:2.0.0
 
-#build angular
-grunt build:angular.js
+# Example: Undo changes made to a submodule's source
+$ grunt checkout:hammer.js:.
+```
 
-#build everything
-grunt build
+__clean__ - Will remove the target directory.
 
-add - Will add submodule(s) from modules.json to the repository.  Note: if a module has already been added, no error's will be raised.
+__copy__ - Will copy the static directories to the target directory.  Like clean, this is configured in the Gruntfile.js.
 
-add_remotes - Add the target module(s) remotes.
-
-build - Build the target module(s).  Output will be copied to a versioned subdirectory of the module's target folder.
-
-clean - Will remove the latest build if one exists.
-
-status - Display the current commits/tags of the submodules, viz-a-viz the git describe command.  You can run git submodule status for a similar view.
+__status__ - Display the current commits/tags of the submodules, viz-a-viz the git describe command.  You can run git submodule status for a similar view.
 
 sync - Attempt to synchronize the target modules remote (upstream by default) to the forked repository (origin).  Basically a fetch, merge into the local master, then push up to origin master.  Finally, reset the submodule back to the commit it was at prior to the sync.  Note, depending on the state of the local repo, a sync may fail.
 
