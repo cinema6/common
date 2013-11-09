@@ -48,6 +48,28 @@ module.exports = function (grunt) {
             lib: path.join(__dirname,'lib')
         },
 
+        copy : {
+            modernizr: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/modernizr',
+                        dest: 'lib/modernizr',
+                        src: '**'
+                    },
+                ]
+            },
+            requirejs: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/requirejs',
+                        dest: 'lib/require',
+                        src: '**'
+                    },
+                ]
+            }
+        }
 
     });
 
@@ -69,6 +91,8 @@ module.exports = function (grunt) {
         }
         return true;
     });
+
+    grunt.registerTask('build-all',['build','copy']);
 
     grunt.registerTask('status',['submodule_version','print-versions']);
 
