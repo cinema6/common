@@ -38,13 +38,21 @@ module.exports = function (grunt) {
                 maxOperations: 10 
             },
             test: {
-                options: {
-                    bucket: 'c6.dev'
-                },
                 upload: [
                     {
                         src: 'lib/**',
                         dest: 'ext/',
+                        rel : 'lib/'
+                    }
+                ]
+            },
+            production: {
+                options: {
+                    bucket: 'c6.ext'
+                },
+                upload: [
+                    {
+                        src: 'lib/**',
                         rel : 'lib/'
                     }
                 ]
