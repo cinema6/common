@@ -15,6 +15,7 @@ module.exports = function (grunt) {
    
     submodules.options = {
         sync : {
+            remote: 'upstream',
             skipIfNoRemote : true
         }
     };
