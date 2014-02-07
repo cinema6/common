@@ -84,6 +84,16 @@ module.exports = function (grunt) {
                         src: '**'
                     },
                 ]
+            },
+            jwplayer: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/jwplayer',
+                        dest: 'lib/jwplayer',
+                        src: '**'
+                    },
+                ]
             }
         }
     });
