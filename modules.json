@@ -52,6 +52,15 @@
         "remotes"   : { "upstream"  : "https://github.com/angular-ui/ui-router.git" },
         "repo"      : "git@github.com:cinema6/ui-router.git",
         "target"    : "lib/ui-router"
+    },
+    "c6embed"       : {
+        "buildDir"  : "dist",
+        "grunt"     : ["build"],
+        "npm"       : true,
+        "path"      : "src/c6embed",
+        "remotes"   : { "upstream"  : "git@github.com:cinema6/c6embed.git" },
+        "repo"      : "git@github.com:cinema6/c6embed.git",
+        "target"    : "lib/c6embed"
     }
 }
 

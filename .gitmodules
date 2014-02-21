@@ -16,3 +16,6 @@
 [submodule "src/c6ui"]
 	path = src/c6ui
 	url = git@github.com:cinema6/c6ui.git
+[submodule "src/c6embed"]
+	path = src/c6embed
+	url = git@github.com:cinema6/c6embed.git
