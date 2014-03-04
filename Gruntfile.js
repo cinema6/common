@@ -94,6 +94,16 @@ module.exports = function (grunt) {
                         src: '**'
                     },
                 ]
+            },
+            iscroll: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/iscroll',
+                        dest: 'lib/iscroll',
+                        src: '**'
+                    },
+                ]
             }
         }
     });
