@@ -13,7 +13,7 @@
         "grunt"     : ["build"],
         "npm"       : true,
         "path"      : "src/c6ui",
-        "remotes"   : {},
+        "remotes"   : { "upstream"  : "git@github.com:cinema6/c6ui.git" },
         "repo"      : "git@github.com:cinema6/c6ui.git",
         "target"    : "lib/c6ui"
     },
