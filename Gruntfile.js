@@ -102,7 +102,17 @@ module.exports = function (grunt) {
                         cwd: 'src/iscroll',
                         dest: 'lib/iscroll',
                         src: '**'
-                    },
+                    }
+                ]
+            },
+            cryptojs: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/cryptojs',
+                        dest: 'lib/cryptojs',
+                        src: '**'
+                    }
                 ]
             }
         }
