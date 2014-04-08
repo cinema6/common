@@ -27,7 +27,7 @@
         "target"    : "lib/gsap"
     },
     "hammer.js"     : {
-        "buildDir"  : "dist",
+        "buildDir"  : "",
         "grunt"     : ["build","--force"],
         "npm"       : true,
         "path"      : "src/hammer.js",
