@@ -21,8 +21,8 @@
     "grunt": "~0.4.1",
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-copy": "~0.4.1",
-    "grunt-git-assist" : "cinema6/grunt-git-assist",
     "grunt-s3": "~0.2.0-alpha.3",
-    "matchdep": "~0.3.0"
+    "matchdep": "~0.3.0",
+    "grunt-git-assist": "git+ssh://git@github.com:cinema6/grunt-git-assist.git"
   }
 }

@@ -195,7 +195,7 @@ __upload__ - An alias for s3.  Use the appropriate task target to specify the en
 
 ```bash
 # Upload to the s3 test bucket
-$  grunt publish:test
+$  grunt upload:test
 ```
 
 ##Updating a submodule library version
@@ -223,7 +223,7 @@ $  grunt build:angular.js
 (4) When your build completes, upload to s3.
 
 ```bash
-$  grunt publish:test
+$  grunt upload:test
 ```
 
 At this point, running the ```git status``` command will show you something like this:
