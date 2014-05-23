@@ -8,6 +8,15 @@
         "repo"      : "git@github.com:cinema6/angular.js.git",
         "target"    : "lib/angular"
     },
+    "twobits.js"    : {
+        "buildDir"  : "dist",
+        "gulp"      : ["build"],
+        "npm"       : true,
+        "path"      : "src/twobits.js",
+        "remotes"   : { "upstream"  : "git@github.com:cinema6/twobits.js.git" },
+        "repo"      : "git@github.com:cinema6/c6ui.git",
+        "target"    : "lib/twobits.js"
+    },
     "c6ui"    : {
         "buildDir"  : "dist",
         "grunt"     : ["build"],
