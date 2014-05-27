@@ -10,11 +10,12 @@
     },
     "twobits.js"    : {
         "buildDir"  : "dist",
+        "grunt"     : false,
         "gulp"      : ["build"],
         "npm"       : true,
         "path"      : "src/twobits.js",
         "remotes"   : { "upstream"  : "git@github.com:cinema6/twobits.js.git" },
-        "repo"      : "git@github.com:cinema6/c6ui.git",
+        "repo"      : "git@github.com:cinema6/twobits.js.git",
         "target"    : "lib/twobits.js"
     },
     "c6ui"    : {
