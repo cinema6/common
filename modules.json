@@ -71,6 +71,14 @@
         "remotes"   : { "upstream"  : "git@github.com:cinema6/c6embed.git" },
         "repo"      : "git@github.com:cinema6/c6embed.git",
         "target"    : "lib/c6embed"
+    },
+    "metagetta": {
+        "buildDir"  : "dist",
+        "grunt"     : ["build"],
+        "npm"       : true,
+        "path"      : "src/metagetta",
+        "remotes"   : { "upstream"  : "git@github.com:cinema6/metagetta.git" },
+        "repo"      : "git@github.com:cinema6/metagetta.git",
+        "target"    : "lib/metagetta"
     }
 }
-

@@ -22,3 +22,6 @@
 [submodule "src/twobits.js"]
 	path = src/twobits.js
 	url = git@github.com:cinema6/twobits.js.git
+[submodule "src/metagetta"]
+	path = src/metagetta
+	url = git@github.com:cinema6/metagetta.git
