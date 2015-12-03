@@ -79,7 +79,7 @@ The src directory will contain two types of content:
 * submodules - Empty directories for the submodules
 * static - Directories with sub-versioned folders and files for 3rd party code that we do not fork/build ourselves.
 
-Once you run the ```grunt inint``` command, the submodule directories will fill with the actual source.
+Once you run the ```grunt init``` command, the submodule directories will fill with the actual source.
 
 Pulling specific versions of 3rd party code, building and deploying to our s3 servers can be managed
 trough the modules file, and the grunt tasks described below.
@@ -262,5 +262,3 @@ $  git status
 nothing to commit (working directory clean)
 
 ```
-
-
