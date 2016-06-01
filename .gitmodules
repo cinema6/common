@@ -25,3 +25,6 @@
 [submodule "src/metagetta"]
 	path = src/metagetta
 	url = git@github.com:cinema6/metagetta.git
+[submodule "src/showcase-marketing"]
+	path = src/showcase-marketing
+	url = git@github.com:cinema6/showcase-marketing.git

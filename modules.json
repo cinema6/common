@@ -80,5 +80,14 @@
         "remotes"   : { "upstream"  : "git@github.com:cinema6/metagetta.git" },
         "repo"      : "git@github.com:cinema6/metagetta.git",
         "target"    : "lib/metagetta"
+    },
+    "showcase-marketing": {
+        "buildDir"  : "dist",
+        "grunt"     : ["build"],
+        "npm"       : true,
+        "path"      : "src/showcase-marketing",
+        "remotes"   : { "upstream"  : "git@github.com:cinema6/showcase-marketing.git" },
+        "repo"      : "git@github.com:cinema6/showcase-marketing.git",
+        "target"    : "lib/showcase-marketing"
     }
 }
